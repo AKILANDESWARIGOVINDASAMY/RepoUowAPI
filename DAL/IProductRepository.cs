@@ -8,6 +8,6 @@ namespace RepoUowAPI.DAL
 {
     public interface IProductRepository : IRepository<Product>
     {
-        IEnumerable<Product> GetTopProducts();            
+        IEnumerable<Product> GetTopProducts(int Count);
     }
 }

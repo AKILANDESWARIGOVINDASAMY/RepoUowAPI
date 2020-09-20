@@ -1,4 +1,5 @@
-﻿using RepoUowAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using RepoUowAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,11 @@ namespace RepoUowAPI.DAL
         public ProductRepository(Dbcontext context) : base(context)
         {
         }
-        public IEnumerable<Product> GetTopProducts()
+        public IEnumerable<Product> GetTopProducts([FromQuery]int Count)
         {
-            return _context.Products.Take(10);
+            return _context.Products.OrderByDescending(d => d.Productid).Take(Count).ToList();
         }
 
 
     }
 }
-    

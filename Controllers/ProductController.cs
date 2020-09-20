@@ -36,7 +36,7 @@ namespace RepoUowAPI.Controllers
         }
         [Route("addproduct")]
         [HttpPost]
-        public void  AddProduct(Product product)
+        public void AddProduct(Product product)
         {
             unitofwork.Products.Add(product);
             unitofwork.complete();
@@ -46,12 +46,17 @@ namespace RepoUowAPI.Controllers
         [HttpGet]
         public void DeleteProduct(int Id)
         {
-           // unitofwork.Products.Get(Id);
+            // unitofwork.Products.Get(Id);
             unitofwork.Products.Remove(Id);
             unitofwork.complete();
         }
+       [Route("popularproducts")]
+        [HttpGet]
+        public IActionResult GetTopProducts(int count)
+        {
+            var Popularproducts = unitofwork.Products.GetTopProducts(count);
+            return Ok(Popularproducts);
 
-
-        
-    }
+        }
+    }     
 } 
